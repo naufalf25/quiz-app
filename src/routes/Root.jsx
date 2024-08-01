@@ -1,7 +1,7 @@
 // eslint-disable-next-line no-unused-vars
 import React, { useEffect } from 'react';
 import Layout from '../components/Layout';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const Root = () => {
   const navigate = useNavigate();
@@ -25,12 +25,12 @@ const Root = () => {
             <i>Please login to try some questions</i>
           </p>
         </div>
-        <a
-          href="/login"
+        <Link
+          to="/login"
           className="mt-10 py-1 px-10 border border-purple1 rounded-md font-bold text-purple1 hover:bg-purple1 hover:text-white"
         >
           Login
-        </a>
+        </Link>
       </div>
     </Layout>
   );
