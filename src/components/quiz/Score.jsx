@@ -1,7 +1,13 @@
 // eslint-disable-next-line no-unused-vars
-import React from 'react';
+import React, { useEffect } from 'react';
 
 const Score = ({ correct, incorrect, questionLists, handleRestart }) => {
+  useEffect(() => {
+    if (questionLists) {
+      localStorage.removeItem('savedData');
+    }
+  });
+
   return (
     <div className="w-full min-h-[88.5vh] p-4 flex justify-center items-center">
       <div className="w-[600px] p-4 text-center border rounded-md border-purple1 md:p-8 lg:p-12">
@@ -18,7 +24,7 @@ const Score = ({ correct, incorrect, questionLists, handleRestart }) => {
           </div>
         </div>
         <p className="mt-16 text-xl font-bold">
-          Total Question: {questionLists.length}
+          Total Question: {questionLists?.length || 0}
         </p>
         <button
           onClick={handleRestart}

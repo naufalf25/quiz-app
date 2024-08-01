@@ -5,25 +5,49 @@ import { useNavigate } from 'react-router-dom';
 // import questionBank from '../../questions.json';
 import QuestionItem from '../components/quiz/QuestionItem';
 import Score from '../components/quiz/Score';
+import Started from '../components/quiz/Started';
 
 const Quiz = () => {
   const [questionLists, setQuestionLists] = useState([]);
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [correct, setCorrect] = useState(0);
   const [incorrect, setIncorrect] = useState(0);
-  const [timer, setTimer] = useState(600);
+  const [timer, setTimer] = useState(300);
   const [started, setStarted] = useState(false);
   const [answerLists, setAnswerLists] = useState([]);
+  const [resume, setResume] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetch('https://opentdb.com/api.php?amount=5')
-      .then((res) => {
-        return res.json();
-      })
-      .then((data) => {
-        setQuestionLists(data.results);
-      });
+    if (localStorage.getItem('savedData') !== null) {
+      const {
+        userId,
+        questionLists,
+        currentQuestion,
+        correct,
+        incorrect,
+        timer,
+      } = JSON.parse(localStorage.getItem('savedData'));
+
+      if (userId === localStorage.getItem('userId')) {
+        setQuestionLists(questionLists);
+        setCurrentQuestion(currentQuestion);
+        setCorrect(correct);
+        setIncorrect(incorrect);
+        setTimer(timer);
+        setResume(true);
+      } else {
+        fetch('https://opentdb.com/api.php?amount=5')
+          .then((res) => {
+            return res.json();
+          })
+          .then((data) => {
+            if (data.results !== undefined && data.results.length > 0) {
+              setQuestionLists(data.results);
+            }
+          });
+      }
+    }
   }, []);
 
   useEffect(() => {
@@ -62,11 +86,13 @@ const Quiz = () => {
   };
 
   const handleRestart = () => {
+    setQuestionLists([]);
     setCurrentQuestion(0);
     setCorrect(0);
     setIncorrect(0);
-    setTimer(600);
+    setTimer(300);
     setStarted(false);
+    setResume(false);
 
     fetch('https://opentdb.com/api.php?amount=5')
       .then((res) => {
@@ -80,17 +106,12 @@ const Quiz = () => {
   return (
     <Layout>
       {!started ? (
-        <div className="w-full min-h-[85vh] p-4 flex flex-col gap-10 justify-center items-center text-center">
-          <h2 className="font-semibold text-xl md:text-2xl lg:text-3xl">
-            Are you ready to answer the questions?
-          </h2>
-          <button
-            onClick={() => setStarted(true)}
-            className="py-2 px-10 border border-purple1 rounded-md bg-purple1 text-white font-semibold text-lg md:text-xl hover:bg-transparent hover:text-purple1"
-          >
-            I&apos;m Ready!!!
-          </button>
-        </div>
+        <Started
+          setStarted={setStarted}
+          resume={resume}
+          questionLists={questionLists}
+          setQuestionLists={setQuestionLists}
+        />
       ) : questionLists && currentQuestion < questionLists.length ? (
         <QuestionItem
           answerLists={answerLists}
@@ -100,6 +121,8 @@ const Quiz = () => {
           setTimer={setTimer}
           started={started}
           timer={timer}
+          correct={correct}
+          incorrect={incorrect}
           handleAnswer={handleAnswer}
         />
       ) : (
