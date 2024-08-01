@@ -29,7 +29,8 @@ const Login = () => {
           setPassword('');
 
           localStorage.setItem('login', true);
-          navigate('/questions');
+          localStorage.setItem('userId', getAuth.id);
+          navigate('/quiz');
           return;
         }
       }
@@ -41,7 +42,7 @@ const Login = () => {
   return (
     <Layout>
       <div className="flex flex-col justify-center items-center">
-        <div className="max-w-[600px] min-h-[90vh] p-4 flex flex-col justify-center items-center gap-20">
+        <div className="max-w-[600px] min-h-[90vh] p-4 flex flex-col justify-center items-center gap-10">
           <Contact />
           <div className="w-full p-4 border border-purple1 rounded-md text-center">
             <h2 className="font-bold text-xl lg:text-2xl">Login</h2>
