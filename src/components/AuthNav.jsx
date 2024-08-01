@@ -7,6 +7,7 @@ const AuthNav = () => {
 
   const logoutUser = () => {
     localStorage.setItem('login', false);
+    localStorage.removeItem('userId');
 
     navigate('/');
   };

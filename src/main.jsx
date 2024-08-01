@@ -5,7 +5,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import Root from './routes/Root';
 import ErrorPage from './error-page';
 import Login from './routes/Login';
-import Questions from './routes/Questions';
+import Quiz from './routes/Quiz';
 
 const router = createBrowserRouter([
   {
@@ -18,8 +18,8 @@ const router = createBrowserRouter([
     element: <Login />,
   },
   {
-    path: 'questions',
-    element: <Questions />,
+    path: 'quiz',
+    element: <Quiz />,
   },
 ]);
 

@@ -8,7 +8,7 @@ const Root = () => {
 
   useEffect(() => {
     if (localStorage.getItem('login') === 'true') {
-      navigate('/questions');
+      navigate('/quiz');
     }
   }, [navigate]);
 
