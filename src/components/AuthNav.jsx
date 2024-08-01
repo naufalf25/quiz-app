@@ -1,13 +1,22 @@
 // eslint-disable-next-line no-unused-vars
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
-const AuthNav = ({ login }) => {
+const AuthNav = () => {
+  const navigate = useNavigate();
+
+  const logoutUser = () => {
+    localStorage.setItem('login', false);
+
+    navigate('/');
+  };
+
   return (
     <div>
-      {login === 'true' ? (
-        <a href="/logout" rel="noopener noreferrer" className="auth-nav">
+      {localStorage.getItem('login') === 'true' ? (
+        <button onClick={logoutUser} className="auth-nav">
           Logout
-        </a>
+        </button>
       ) : (
         <a href="/login" rel="noopener noreferrer" className="auth-nav">
           Login

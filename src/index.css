@@ -3,5 +3,9 @@
 @tailwind utilities;
 
 .auth-nav {
-  @apply p-2 border-b-4 font-bold border-b-transparent text-xl transition-colors hover:border-b-purple1;
+  @apply p-2 border-b-4 font-bold border-b-transparent text-lg transition-colors hover:border-b-purple1 md:text-xl;
+}
+
+.login-input {
+  @apply w-full py-2 px-4 border border-slate-700 rounded-md outline-none text-sm md:text-base placeholder:text-slate-700;
 }

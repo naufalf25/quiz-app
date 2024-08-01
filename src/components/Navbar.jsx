@@ -2,11 +2,14 @@ import AuthNav from './AuthNav';
 
 const Navbar = () => {
   return (
-    <header className="py-6 px-10 shadow-md flex justify-between items-center">
-      <h1 className="font-bold text-2xl uppercase font-pacifico text-purple1">
+    <header className="py-6 px-4 shadow-md flex justify-between items-center md:px-10">
+      <a
+        href="/"
+        className="font-bold text-xl uppercase font-pacifico text-purple1 md:text-2xl"
+      >
         Answer Me!
-      </h1>
-      <AuthNav login="false" />
+      </a>
+      <AuthNav />
     </header>
   );
 };
