@@ -1,6 +1,7 @@
 // eslint-disable-next-line no-unused-vars
 import React from 'react';
 import Timer from './Timer';
+import { useBeforeUnload } from 'react-router-dom';
 
 const QuestionItem = ({
   timer,
@@ -10,14 +11,34 @@ const QuestionItem = ({
   setTimer,
   currentQuestion,
   answerLists,
+  correct,
+  incorrect,
   handleAnswer,
 }) => {
+  useBeforeUnload(() => {
+    const data = {
+      userId: localStorage.getItem('userId'),
+      questionLists,
+      currentQuestion,
+      correct,
+      incorrect,
+      timer,
+    };
+
+    if (currentQuestion < questionLists.length) {
+      localStorage.setItem('savedData', JSON.stringify(data));
+    }
+  });
+
   const removeCharacters = (question) => {
     return question
       .replace(/(&quot;)/g, '"')
       .replace(/(&rsquo;)/g, '"')
       .replace(/(&#039;)/g, "'")
-      .replace(/(&amp;)/g, '"');
+      .replace(/(&amp;)/g, '"')
+      .replace(/(&ldquo;)/g, '“')
+      .replace(/(&rdquo;)/g, '”')
+      .replace(/(&ocirc;)/g, 'ô');
   };
 
   return (
