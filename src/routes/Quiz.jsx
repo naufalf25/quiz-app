@@ -93,14 +93,6 @@ const Quiz = () => {
     setTimer(300);
     setStarted(false);
     setResume(false);
-
-    fetch('https://opentdb.com/api.php?amount=5')
-      .then((res) => {
-        return res.json();
-      })
-      .then((data) => {
-        setQuestionLists(data.results);
-      });
   };
 
   return (
