@@ -1,0 +1,12 @@
+{
+  "redirects": [
+    {
+      "source": "/login",
+      "destination": "/"
+    },
+    {
+      "source": "/quiz",
+      "destination": "/"
+    }
+  ]
+}
