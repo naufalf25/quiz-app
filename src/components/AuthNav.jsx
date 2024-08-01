@@ -1,6 +1,6 @@
 // eslint-disable-next-line no-unused-vars
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const AuthNav = () => {
   const navigate = useNavigate();
@@ -19,9 +19,9 @@ const AuthNav = () => {
           Logout
         </button>
       ) : (
-        <a href="/login" rel="noopener noreferrer" className="auth-nav">
+        <Link to="/login" rel="noopener noreferrer" className="auth-nav">
           Login
-        </a>
+        </Link>
       )}
     </div>
   );
