@@ -1,6 +1,6 @@
 <!-- PROJECT LOGO -->
 <div align="center">
-  <img src="screenshot.jpeg" alt="Screenshot" width="100%">
+  <img src="public/screenshot.jpeg" alt="Screenshot" width="100%">
 
   <h3 align="center">Answer Me!</h3>
 
